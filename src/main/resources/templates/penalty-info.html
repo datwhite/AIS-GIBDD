@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="col-8 mt-3 mx-auto container">
+    <from>
+        <div th:each="el : ${penalty}" class="alert">
+
+            <div class="alert alert-info">
+<!--                <b th:text="'Погашен: ' + ${el.paid}"/><br>-->
+                <b th:class="${el.paid} ? 'text-success' : 'text-danger'" th:text="${el.paid} ? 'Погашен' : 'Не погашен'" />
+
+                <b th:text="${el.Date_time_payment}"/>
+            </div>
+            <div  class="alert alert-info">
+                <b th:text="'Дата нарушения: ' + ${el.Date_time_penalty}"/><br>
+                <b th:text="'Место нарушения: ' + ${el.Place_of_violation}"/>
+            </div>
+            <div  class="alert alert-info">
+                <b th:text="${el.Penalty_size} + 'р'"/><br>
+            </div>
+            <div  class="alert alert-info">
+                <b th:text="${el.Article}"/><br>
+                <b th:text="${el.short_description}"/>
+            </div>
+            <div  class="alert alert-info">
+                <b th:text="'Номер постановления: ' + ${el.decreeNumber}"/><br>
+
+            </div>
+            <div class="row">
+                <a th:href="${el.decreeNumber} + '/report'" class="btn btn-lg btn-secondary btn-block mt-1">Отчет</a>
+                <div class="btn-group btn-block">
+                    <input class="btn btn-lg btn-success mt-1 btn-block" type="submit" value="Оплатить"/>
+                    <input class="btn btn-lg btn-warning mt-1 btn-block" type="submit" value="Обжаловать"/>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </from>
+
+</div>
+</body>
+</html>

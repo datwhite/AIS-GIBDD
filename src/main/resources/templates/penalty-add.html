@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5 mb-5">
+    <h1>Добавление штрафа</h1>
+<!--    enctype="multipart/form-data"-->
+    <form action="/admin/add" method="post">
+        <input type="text" name="decreeNumber" placeholder="Введите номер постановления" class="form-control"><br>
+        <input type="text" name="Certificate_number" placeholder="Введите номер удостоверения" class="form-control"><br>
+        <input type="text" name="Camera_number" placeholder="Введите номер камеры" class="form-control"><br>
+        <input type="text" name="Article" placeholder="Введите статью" class="form-control"><br>
+        <input type="date" name="Date_time_penalty" placeholder="Введите дату и время нарушения" class="form-control"><br>
+        <input type="text" name="Penalty_size" placeholder="Введите размер штрафа" class="form-control"><br>
+<!--        <input type="date" name="Date_time_payment" placeholder="Введите время оплаты штрафа" class="form-control"><br>-->
+        <input type="text" placeholder="Введите статус оплаты" class="form-control"><br>
+<!--        <input type="file" name="Photo" placeholder="Введите ссылку к фото" class="form-control"><br>-->
+        <input type="text" name="Place_of_violation" placeholder="Введите место нарушения" class="form-control"><br>
+<!--        <input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>-->
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-success">Добавить штраф</button>
+    </form>
+</div>
+
+
+</body>
+</html>

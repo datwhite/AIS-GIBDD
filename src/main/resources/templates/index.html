@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GIBDD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="card col-auto mx-auto">
+            <div class="card-body">
+                <h5 class="card-title mb-5">Права</h5>
+                <form action="/" method="post" class="form-signin">
+                    <input type="text" name="searchParam" id="inputLicense" class="form-control form-control-lg" placeholder="Номер и серия В/У" required="" autofocus="" th:value="${Driver_license_phys}">
+                    <input type="hidden" name="typeSearch" value="License">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <input class="btn btn-lg btn-primary btn-block mt-2" type="submit" value="Проверить штрафы"/>
+                </form>
+            </div>
+        </div>
+        <div class="card col-auto mx-auto">
+            <div class="card-body">
+                <h5 class="card-title mb-5">ИНН</h5>
+                <!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                <form action="/" method="post" class="form-signin">
+                    <!--                <label class="card-text">Номер и серия В/У</label>-->
+                    <input type="text" name="searchParam" class="form-control form-control-lg" placeholder="ИНН" required="" autofocus="" th:value="${INN}">
+                    <input type="hidden" name="typeSearch" value="INN">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <input class="btn btn-lg btn-primary btn-block mt-2" type="submit" value="Проверить штрафы"/>
+                    <!--    <p class="mt-5 mb-3 text-muted">© 2017-2020</p>-->
+                </form>
+            </div>
+        </div>
+        <div class="card col-auto mx-auto">
+            <div class="card-body">
+                <h5 class="card-title mb-5">Номер автомобиля</h5>
+                <!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                <form action="/" method="post" class="form-signin">
+                    <!--                <label class="card-text">Номер и серия В/У</label>-->
+                    <input type="text" name="searchParam" class="form-control form-control-lg" placeholder="Номер автомобиля" required="" autofocus="" th:value="${State_number}">
+                    <input type="hidden" name="typeSearch" value="State_number">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <input class="btn btn-lg btn-primary btn-block mt-2" type="submit" value="Проверить штрафы"/>
+                    <!--    <p class="mt-5 mb-3 text-muted">© 2017-2020</p>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-8 mt-3 mx-auto">
+
+
+    <div th:if="${#lists.isEmpty(penalty)} AND ${search != false}" class="d-flex justify-content-center">
+        <h2>Неоплаченных штрафов нет!</h2>
+    </div>
+    <div th:if="${not #lists.isEmpty(penalty)}"></div>
+        <div th:each="el : ${penalty}" class="alert alert-info">
+            <a th:href="'/penalty/' + ${el[0]}">
+                <div class="d-flex justify-content-between">
+<!--                    <b th:text="${Driver_license_phys} + k"/>-->
+                    <div>
+                        <b th:text="${el[0]}"/>
+                        <!--                                <span th:text="${el.Article}"/>-->
+                        <span th:text="${el[1]}"/>
+                    </div>
+                    <b th:text="${el[2]}"/>
+                </div>
+            </a>
+        </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</body>
+</html>
